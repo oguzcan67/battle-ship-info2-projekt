@@ -1,0 +1,21 @@
+/* Add some styles for the game board and the squares */
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-gap: 1px;
+  border: 1px solid black;
+}
+
+.square {
+  background-color: white;
+  border: 1px solid black;
+}
+
+.hit {
+  background-color: red;
+}
+
+.miss {
+  background-color: blue;
+}

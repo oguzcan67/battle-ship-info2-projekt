@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Battleship</title>
+  <style>
+      /* Add some styles for the game board and the squares */
+      .board {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        grid-gap: 1px;
+        border: 1px solid black;
+      }
+
+      .square {
+        background-color: white;
+        border: 1px solid black;
+      }
+
+      .hit {
+        background-color: red;
+      }
+
+      .miss {
+        background-color: blue;
+      }
+    </style>
+</head>
+<body>
+<div id="game">
+  <h1>Battleship</h1>
+  <div class="board">
+    <!-- Add a square element for each square on the game board -->
+    <div class="square" v-for="i in 100" :key="i"></div>
+  </div>
+</div>
+<!-- Include Vue.js and the script that contains the game logic -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
