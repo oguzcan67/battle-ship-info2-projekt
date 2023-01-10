@@ -1,4 +1,5 @@
-
+// Note MA: Always wrap JS Code in a function and don't declare global variables if not absolutely neccessary. Seearch 'Module Pattern' for further Information
+(function(){
   // declararation of variables
   // Create the game board as a two-dimensional array of squares
   const rows = 10;
@@ -19,22 +20,40 @@
   // Function to render the game board to the DOM
   function renderBoard() {
     let boardHTML = '';
+
+    renderHeader();
+
     for (let i = 0; i < rows; i++) {
-      boardHTML += '<div class="row">';
-      for (let j = 0; j < cols; j++) {
-        let square = board[i][j];
-        let className = 'square';
-        if (square.occupied) {
-          className += ' occupied';
+        boardHTML += '<div class="row">';
+        for (let j = 0; j < cols; j++) {
+          let square = board[i][j];
+          let className = 'square';
+          if (square.occupied) {
+            className += ' occupied';
+          }
+          if (square.hit) {
+            className += ' hit';
+          }
+          if (j === 0) {
+            // Render Sidebar indice as first element of the row
+            boardHTML += '<div class="counterWrapper"><span>' + i + '</span></div>';
+          }
+          boardHTML += `<div class="${className}" data-x="${square.x}" data-y="${square.y}"></div>`;
         }
-        if (square.hit) {
-          className += ' hit';
-        }
-        boardHTML += `<div class="${className}" data-x="${square.x}" data-y="${square.y}"></div>`;
+        boardHTML += '</div>';
       }
-      boardHTML += '</div>';
+    document.getElementById('innerBoard').innerHTML = boardHTML;
+  }
+
+  function renderHeader() {
+    let headerHTMl = '';
+    for (let i = 0; i < (rows + 1); i++) {
+      const shownCounter = i !== 0 ? i - 1 : '';
+
+      headerHTMl += '<div class="counterWrapper"><span>' + shownCounter  + '</span></div>';
     }
-    document.getElementById('board').innerHTML = boardHTML;
+
+    document.querySelector('.header .row').innerHTML = headerHTMl;
   }
 
 // Animate the square when a ship is hit
@@ -176,3 +195,4 @@
 
 // Initialize the game by rendering the board to the DOM
   renderBoard();
+})();
